@@ -281,6 +281,272 @@ canvas:focus-visible {
   letter-spacing: 0.17em;
 }
 
+.gesture-panel {
+  position: absolute;
+  z-index: 3;
+  top: 105px;
+  right: 34px;
+  width: 254px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  border-radius: 17px;
+  background: linear-gradient(145deg, rgba(255, 252, 251, 0.86), rgba(255, 246, 249, 0.77));
+  box-shadow: 0 15px 44px rgba(107, 57, 82, 0.13);
+  backdrop-filter: blur(18px);
+}
+
+.gesture-panel-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 11px;
+}
+
+.gesture-eyebrow {
+  margin: 0 0 4px;
+  color: #bf6489;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.gesture-panel-heading h2 {
+  margin: 0;
+  color: #654357;
+  font-family: var(--serif);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.camera-state {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 7px;
+  border: 1px solid rgba(220, 159, 184, 0.35);
+  border-radius: 999px;
+  color: #997284;
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.camera-state-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #75a982;
+  box-shadow: 0 0 0 3px rgba(117, 169, 130, 0.13);
+}
+
+.gesture-panel[data-state='tracking'] .camera-state-dot {
+  animation: camera-pulse 1.5s ease-in-out infinite;
+}
+
+.gesture-panel[data-state='off'] .camera-state-dot,
+.gesture-panel[data-state='error'] .camera-state-dot {
+  background: #c58ba1;
+  box-shadow: 0 0 0 3px rgba(197, 139, 161, 0.12);
+}
+
+.gesture-preview {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1px solid rgba(224, 173, 194, 0.42);
+  border-radius: 11px;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(255, 250, 244, 0.9), transparent 58%),
+    linear-gradient(145deg, #f8e6ed, #eacbd9);
+}
+
+.gesture-preview video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1);
+}
+
+.gesture-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  color: #a37c90;
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.gesture-placeholder svg {
+  width: 23px;
+  height: 23px;
+  fill: none;
+  stroke: #c27e9d;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.45;
+}
+
+.gesture-spinner {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(253, 245, 248, 0.42);
+}
+
+.gesture-spinner[hidden],
+.gesture-placeholder[hidden],
+.gesture-marker[hidden],
+.gesture-preview video[hidden],
+.gesture-actions button[hidden] {
+  display: none;
+}
+
+.gesture-spinner span {
+  width: 28px;
+  height: 28px;
+  border: 2px solid rgba(205, 112, 150, 0.24);
+  border-top-color: #d75088;
+  border-radius: 50%;
+  animation: gesture-spin 700ms linear infinite;
+}
+
+.gesture-marker {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid white;
+  border-radius: 50%;
+  background: rgba(216, 79, 137, 0.52);
+  box-shadow:
+    0 0 0 3px rgba(216, 79, 137, 0.4),
+    0 0 14px rgba(255, 255, 255, 0.95);
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.gesture-readout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 11px;
+}
+
+.gesture-readout-label {
+  color: #ad899a;
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.gesture-readout strong {
+  overflow: hidden;
+  color: #76566a;
+  font-size: 9px;
+  font-weight: 600;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gesture-readout strong[data-active='true'] {
+  color: #bc4678;
+}
+
+.gesture-status {
+  min-height: 26px;
+  margin: 6px 0 9px;
+  color: #947487;
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.gesture-panel[data-state='error'] .gesture-status {
+  color: #a83e61;
+}
+
+.gesture-panel[data-state='tracking'] .gesture-status {
+  color: #69866e;
+}
+
+.gesture-actions button {
+  width: 100%;
+  min-height: 34px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 9px;
+  font-weight: 700;
+  transition:
+    background 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.gesture-actions button:hover {
+  transform: translateY(-1px);
+}
+
+.gesture-enable {
+  background: linear-gradient(135deg, #df6395, #c9437d);
+  box-shadow: 0 5px 14px rgba(196, 67, 123, 0.2);
+  color: white;
+}
+
+.gesture-enable:hover {
+  background: linear-gradient(135deg, #e879a5, #d75289);
+}
+
+.gesture-disable {
+  border-color: rgba(196, 115, 149, 0.25) !important;
+  background: rgba(255, 255, 255, 0.74);
+  color: #99647c;
+}
+
+.gesture-guide {
+  margin-top: 10px;
+  border-top: 1px solid rgba(206, 160, 181, 0.22);
+}
+
+.gesture-guide summary {
+  padding-top: 9px;
+  color: #956e82;
+  cursor: pointer;
+  font-size: 9px;
+  font-weight: 600;
+  list-style-position: inside;
+}
+
+.gesture-guide ul {
+  display: grid;
+  gap: 6px;
+  margin: 9px 0 2px;
+  padding: 0 0 0 14px;
+  color: #96798a;
+  font-size: 8px;
+  line-height: 1.45;
+}
+
+.gesture-guide li span {
+  color: #a64771;
+  font-weight: 700;
+}
+
+.gesture-privacy {
+  margin: 9px 0 0;
+  color: #a38897;
+  font-size: 7px;
+  line-height: 1.5;
+}
+
 .room-nav {
   position: absolute;
   z-index: 3;
@@ -388,6 +654,18 @@ canvas:focus-visible {
   }
 }
 
+@keyframes gesture-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes camera-pulse {
+  50% {
+    box-shadow: 0 0 0 5px rgba(117, 169, 130, 0.08);
+  }
+}
+
 @media (max-width: 850px) {
   .topbar {
     inset: 20px 20px auto;
@@ -413,6 +691,13 @@ canvas:focus-visible {
     left: 20px;
     width: min(280px, calc(100vw - 40px));
     padding: 18px 20px 15px;
+  }
+
+  .gesture-panel {
+    top: 100px;
+    right: 20px;
+    width: 228px;
+    padding: 12px;
   }
 
   .room-nav {
@@ -474,6 +759,64 @@ canvas:focus-visible {
     top: 50px;
     right: 0;
     gap: 5px;
+  }
+
+  .gesture-panel {
+    top: 96px;
+    right: 12px;
+    width: 174px;
+    padding: 9px;
+    border-radius: 14px;
+  }
+
+  .gesture-panel-heading {
+    margin-bottom: 8px;
+  }
+
+  .gesture-panel-heading h2 {
+    font-size: 13px;
+  }
+
+  .gesture-eyebrow {
+    font-size: 7px;
+  }
+
+  .camera-state {
+    gap: 4px;
+    padding: 3px 5px;
+    font-size: 6px;
+  }
+
+  .gesture-preview {
+    border-radius: 8px;
+  }
+
+  .gesture-readout {
+    margin-top: 8px;
+  }
+
+  .gesture-readout-label {
+    font-size: 6px;
+  }
+
+  .gesture-readout strong,
+  .gesture-status,
+  .gesture-guide summary {
+    font-size: 8px;
+  }
+
+  .gesture-status {
+    min-height: 31px;
+    margin: 5px 0 7px;
+  }
+
+  .gesture-actions button {
+    min-height: 31px;
+    font-size: 8px;
+  }
+
+  .gesture-privacy {
+    font-size: 6px;
   }
 
   .icon-button {

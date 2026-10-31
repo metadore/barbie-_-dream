@@ -191,6 +191,13 @@ export function createScene(canvas, mount) {
     }
   }
 
+  function rotateByGesture(horizontalAngle, verticalAngle) {
+    if (!Number.isFinite(horizontalAngle) || !Number.isFinite(verticalAngle)) return;
+    transition = null;
+    controls.rotateLeft(THREE.MathUtils.clamp(horizontalAngle, -0.065, 0.065));
+    controls.rotateUp(THREE.MathUtils.clamp(verticalAngle, -0.065, 0.065));
+  }
+
   function onControlStart() {
     transition = null;
   }
@@ -268,8 +275,10 @@ export function createScene(canvas, mount) {
   return {
     scene,
     camera,
+    controls,
     focusRoom,
     resetView,
+    rotateByGesture,
     setNight,
     setSparkles(enabled) {
       sparklesEnabled = enabled;

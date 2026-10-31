@@ -98,6 +98,72 @@
           <p class="card-caption">A DREAMHOUSE FOR EVERY DAYDREAM</p>
         </aside>
 
+        <aside id="gesture-panel" class="gesture-panel" aria-label="Hand gesture controls">
+          <div class="gesture-panel-heading">
+            <div>
+              <p class="gesture-eyebrow">A LITTLE MAGIC</p>
+              <h2>Hands-free exploring</h2>
+            </div>
+            <span class="camera-state">
+              <span class="camera-state-dot" aria-hidden="true"></span>
+              <span>LOCAL</span>
+            </span>
+          </div>
+
+          <div class="gesture-preview">
+            <video
+              id="gesture-video"
+              autoplay
+              muted
+              playsinline
+              hidden
+              aria-label="Mirrored live camera preview for hand tracking"
+            ></video>
+            <div id="gesture-placeholder" class="gesture-placeholder">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <rect x="3" y="6" width="13" height="12" rx="2"></rect>
+                <path d="m16 10 5-3v10l-5-3"></path>
+              </svg>
+              <span>Your camera is off</span>
+            </div>
+            <span id="gesture-spinner" class="gesture-spinner" hidden aria-label="Loading">
+              <span></span>
+            </span>
+            <span id="gesture-marker" class="gesture-marker" hidden aria-hidden="true"></span>
+          </div>
+
+          <div class="gesture-readout">
+            <span class="gesture-readout-label">DETECTED</span>
+            <strong id="gesture-label">No hand detected</strong>
+          </div>
+          <p id="gesture-status" class="gesture-status" role="status" aria-live="polite">
+            Camera is off. Enable to start gesture controls.
+          </p>
+
+          <div class="gesture-actions">
+            <button id="gesture-enable" class="gesture-enable" type="button">
+              <span aria-hidden="true">✦</span>
+              Enable gesture controls
+            </button>
+            <button id="gesture-disable" class="gesture-disable" type="button" hidden>
+              Turn camera off
+            </button>
+          </div>
+
+          <details class="gesture-guide">
+            <summary>Gesture guide</summary>
+            <ul>
+              <li><span>Open palm</span> Move to look around</li>
+              <li><span>Pinch</span> Select an object</li>
+              <li><span>Hold open palm</span> Reset the view</li>
+              <li><span>Thumbs up</span> Change the lighting</li>
+            </ul>
+          </details>
+          <p class="gesture-privacy">
+            Camera frames are processed on this device and are never uploaded.
+          </p>
+        </aside>
+
         <nav class="room-nav" aria-label="Explore Dreamhouse rooms">
           <span class="nav-label">EXPLORE</span>
           <button type="button" data-room-id="living" aria-pressed="true">Living</button>

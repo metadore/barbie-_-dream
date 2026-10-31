@@ -3,6 +3,8 @@ import { createDreamhouse } from './dreamhouse.js';
 import { createInteractions } from './interactions.js';
 import { createScene } from './scene.js';
 import { createUI } from './ui.js';
+import { createGestureController } from './gesture/GestureController.js';
+import { createGesturePanel } from './gesture/GesturePanel.js';
 
 const mount = document.querySelector('#scene-shell');
 const canvas = document.querySelector('#dreamhouse-canvas');
@@ -27,6 +29,14 @@ const interactions = createInteractions({
     ui.showObject(roomId, detail);
   },
 });
+const gesturePanel = createGesturePanel();
+const gestureController = createGestureController({
+  video: gesturePanel.video,
+  panel: gesturePanel,
+  scene: experience,
+  ui,
+  interactions,
+});
 
 ui.onRoomSelect((roomId) => {
   experience.focusRoom(roomId);
@@ -41,6 +51,7 @@ ui.onReset(() => {
 
 function destroyExperience() {
   window.removeEventListener('pagehide', destroyExperience);
+  void gestureController.destroy();
   interactions.destroy();
   ui.destroy();
   experience.destroy();

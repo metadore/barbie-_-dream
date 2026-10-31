@@ -27,6 +27,27 @@ export function createInteractions({
     return intersections[0]?.object ?? null;
   }
 
+  function selectHit(hit) {
+    const interaction = hit?.userData.interaction;
+    if (!interaction) return false;
+    if (interaction.detail) {
+      onSelectObject(interaction.roomId, interaction.detail);
+    } else {
+      onSelectRoom(interaction.roomId);
+    }
+    return true;
+  }
+
+  function selectAtNormalizedCoordinates(x, y) {
+    if (!Number.isFinite(x) || !Number.isFinite(y)) return false;
+    pointer.set(
+      Math.max(-1, Math.min(1, x * 2 - 1)),
+      Math.max(-1, Math.min(1, 1 - y * 2)),
+    );
+    raycaster.setFromCamera(pointer, camera);
+    return selectHit(raycaster.intersectObjects(interactiveObjects, false)[0]?.object);
+  }
+
   function handlePointerMove(event) {
     const hit = hitTest(event);
     if (hit === hovered) return;
@@ -45,15 +66,12 @@ export function createInteractions({
     pressed = null;
     if (distance > 7) return;
 
-    const hit = hitTest(event);
-    const interaction = hit?.userData.interaction;
-    if (!interaction) return;
-
-    if (interaction.detail) {
-      onSelectObject(interaction.roomId, interaction.detail);
-    } else {
-      onSelectRoom(interaction.roomId);
-    }
+    const bounds = canvas.getBoundingClientRect();
+    if (!bounds.width || !bounds.height) return;
+    selectAtNormalizedCoordinates(
+      (event.clientX - bounds.left) / bounds.width,
+      (event.clientY - bounds.top) / bounds.height,
+    );
   }
 
   function clearPressed() {
@@ -72,6 +90,7 @@ export function createInteractions({
   canvas.addEventListener('pointerleave', handlePointerLeave);
 
   return {
+    selectAtNormalizedCoordinates,
     destroy() {
       canvas.removeEventListener('pointermove', handlePointerMove);
       canvas.removeEventListener('pointerdown', handlePointerDown);

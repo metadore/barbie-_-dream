@@ -70,6 +70,13 @@ export function createUI() {
       sparklesEnabled ? 'Sparkles on' : 'Sparkles off';
   }
 
+  function toggleDayNight() {
+    isNight = !isNight;
+    setDayLabel();
+    dayToggleHandler?.(isNight);
+    return isNight;
+  }
+
   showRoom(DEFAULT_ROOM);
   setDayLabel();
   setSparkleLabel();
@@ -88,11 +95,7 @@ export function createUI() {
   let sparkleToggleHandler = null;
   let resetHandler = null;
 
-  listen(dayToggle, 'click', () => {
-    isNight = !isNight;
-    setDayLabel();
-    dayToggleHandler?.(isNight);
-  });
+  listen(dayToggle, 'click', toggleDayNight);
   listen(sparkleToggle, 'click', () => {
     sparklesEnabled = !sparklesEnabled;
     setSparkleLabel();
@@ -103,6 +106,7 @@ export function createUI() {
   return {
     showRoom,
     showObject,
+    toggleDayNight,
     onRoomSelect(handler) {
       roomSelectionHandler = handler;
     },
