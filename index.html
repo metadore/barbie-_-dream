@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Step inside Barbie's Dreamhouse, a little 3D world made for big daydreams."
+    />
+    <meta name="theme-color" content="#f6dce8" />
+    <title>Barbie's Dreamhouse — A little world of wonder</title>
+  </head>
+  <body>
+    <main id="app">
+      <div id="scene-shell" class="scene-shell">
+        <canvas
+          id="dreamhouse-canvas"
+          class="dreamhouse-canvas"
+          role="img"
+          aria-label="Interactive 3D dollhouse. Use the room buttons or drag to explore."
+          aria-describedby="canvas-help"
+          tabindex="0"
+        ></canvas>
+
+        <div class="scene-wash" aria-hidden="true"></div>
+
+        <header class="topbar">
+          <a class="brand" href="#app" aria-label="Barbie's Dreamhouse home">
+            <span class="brand-heart" aria-hidden="true">
+              <svg viewBox="0 0 32 32" focusable="false">
+                <path d="M16 27S3.5 19.2 3.5 10.8A6.2 6.2 0 0 1 16 9.5a6.2 6.2 0 0 1 12.5 1.3C28.5 19.2 16 27 16 27Z" />
+              </svg>
+            </span>
+            <span class="brand-copy">
+              <span class="brand-kicker">WELCOME TO</span>
+              <span class="brand-title">BARBIE'S <em>DREAMHOUSE</em></span>
+            </span>
+          </a>
+          <p class="welcome-note">A little world of wonder, made just for you.</p>
+
+          <div class="toolbar" aria-label="Dreamhouse settings">
+            <button
+              id="day-toggle"
+              class="icon-button toggle-button"
+              type="button"
+              aria-label="Switch to moonlight"
+              aria-pressed="false"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <circle cx="12" cy="12" r="3.6"></circle>
+                <path d="M12 2.5v2M12 19.5v2M4.6 4.6 6 6M18 18l1.4 1.4M2.5 12h2M19.5 12h2M4.6 19.4 6 18M18 6l1.4-1.4"></path>
+              </svg>
+              <span class="control-label">Daylight</span>
+            </button>
+            <button
+              id="sparkle-toggle"
+              class="icon-button toggle-button"
+              type="button"
+              aria-label="Turn sparkles off"
+              aria-pressed="true"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="m12 2 1.8 7.1L21 11l-7.2 1.9L12 20l-1.8-7.1L3 11l7.2-1.9L12 2Z"></path>
+                <path d="m19 15 .8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8L19 15Z"></path>
+              </svg>
+              <span class="control-label">Sparkles on</span>
+            </button>
+            <button
+              id="reset-view"
+              class="icon-button reset-button"
+              type="button"
+              aria-label="Reset camera to the whole Dreamhouse"
+              title="Reset view"
+            >
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M4.5 8.5A8 8 0 1 1 4 14"></path>
+                <path d="M4.5 3.8v4.8h4.8"></path>
+              </svg>
+              <span class="control-label">Reset</span>
+            </button>
+          </div>
+        </header>
+
+        <p id="canvas-help" class="sr-only">
+          Drag to rotate the dollhouse, scroll to zoom, and use the room navigation
+          buttons to explore. Use the arrow keys to pan the view.
+        </p>
+
+        <aside class="room-card" aria-live="polite" aria-atomic="true">
+          <div class="card-flower" aria-hidden="true">✿</div>
+          <p id="room-category" class="room-category">The heart of the home</p>
+          <h1 id="room-title">Living room</h1>
+          <p id="room-description">
+            A rosy little lounge made for movie nights, tea parties, and the very
+            best kind of daydreaming.
+          </p>
+          <span class="card-rule" aria-hidden="true"></span>
+          <p class="card-caption">A DREAMHOUSE FOR EVERY DAYDREAM</p>
+        </aside>
+
+        <nav class="room-nav" aria-label="Explore Dreamhouse rooms">
+          <span class="nav-label">EXPLORE</span>
+          <button type="button" data-room-id="living" aria-pressed="true">Living</button>
+          <button type="button" data-room-id="kitchen" aria-pressed="false">Kitchen</button>
+          <button type="button" data-room-id="bedroom" aria-pressed="false">Bedroom</button>
+          <button type="button" data-room-id="wardrobe" aria-pressed="false">Wardrobe</button>
+          <button type="button" data-room-id="balcony" aria-pressed="false">Balcony</button>
+          <button type="button" data-room-id="garden" aria-pressed="false">Garden</button>
+          <button type="button" data-room-id="pool" aria-pressed="false">Pool</button>
+        </nav>
+
+        <div class="interaction-hint" aria-hidden="true">
+          <span class="drag-icon">↗</span>
+          <span>DRAG TO LOOK AROUND</span>
+          <span class="hint-divider">·</span>
+          <span>SCROLL TO ZOOM</span>
+        </div>
+
+        <p id="scene-status" class="sr-only" aria-live="polite"></p>
+      </div>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
